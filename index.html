@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>F.I.C.A.R.</title>
+		<meta charset="utf-8">
+		<link rel="icon" href="https://em-content.zobj.net/source/twitter/31/regional-indicator-symbol-letter-f_1f1eb.png">
+		<style>
+			:root {
+				--default: #9cbabd;
+				--done: #a5efa6;
+			}
+		
+			body {
+				background: linear-gradient(0deg, black, #0f0f0f);
+				background-repeat: no-repeat;
+				background-size: 100vw 100vh;
+			}
+		
+			#main {
+				width: 75%;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			#main button {
+				width: 200px;
+				height: 200px;
+				font-size: 50px;
+				outline: 0;
+				padding: 8px;
+				border: 2px solid white;
+				border-radius: 8px;
+				background-color: transparent;
+				color: white;
+				font-weight: bold;
+				text-align: center;
+				transition: background-color .1s linear, color .1s linear;
+				cursor: pointer;
+			}
+
+			#main button:hover {
+				color: white!important;
+			}
+
+			#main button.default {
+				border-color: var(--default);
+				color: var(--default);
+			}
+
+			#main button.default:hover {
+				background-color: var(--default);
+			}
+
+			#main button.done {
+				border: 10px solid var(--done);
+				color: var(--done);
+			}
+
+			#main button.done:hover {
+				background-color: var(--done);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<button id='F' class="default">F</button>
+			<button id='I' class="default">I</button>
+			<button id='C' class="default">C</button>
+			<button id='A' class="default">A</button>
+			<button id='R' class="default">R</button>
+		</div>
+		<script>
+			if (!localStorage.getItem("jdata")) {
+				jdata = {};
+				[...document.querySelectorAll("#main button")].map(x => jdata[x.id] = x.className);
+				localStorage.setItem("jdata", JSON.stringify(jdata));
+			} else {
+				jdata = JSON.parse(localStorage.getItem("jdata"));
+				[...document.querySelectorAll("#main button")].map(x => x.className = jdata[x.id]);
+			}
+
+			function update(){
+				jdata = {};
+				[...document.querySelectorAll("#main button")].map(x => jdata[x.id] = x.className);
+				localStorage.setItem("jdata", JSON.stringify(jdata));
+			}
+
+			function click(id){
+				id.className = (id.className == "default" ? "done" : "default");
+				update();
+			}
+
+			F.onclick = () => click(F);
+			I.onclick = () => click(I);
+			C.onclick = () => click(C);
+			A.onclick = () => click(A);
+			R.onclick = () => click(R);
+		</script>
+	</body>
+</html>
